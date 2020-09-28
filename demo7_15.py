@@ -6,7 +6,7 @@ def clock(func):
 		elapsed=time.perf_counter()-t0
 		name=func.__name__
 		arg_str=','.join(repr(arg) for arg in args)
-		print('arg_str:%s,arg:%s'%(arg_str,args))
+		#print('arg_str:%s,arg:%s'%(arg_str,args))
 		print('[%.8fs] %s(%s)->%r'%(elapsed,name,arg_str,result))
 		return result
 	return clocked
