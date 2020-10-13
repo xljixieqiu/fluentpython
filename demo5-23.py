@@ -6,7 +6,7 @@ metro_data=[('Tokyo','JP',36.933,(35.689722,139.691667)),
 ('Sao Paulo','BR',19.649,(-23.547778,-46,635833)),]
 for city in sorted(metro_data,key=itemgetter(1)):
 	print(city)
-#与上面for循环差不多，就是没有按第一个国家简写排序
+#提取每个city的第二个元素
 for city in metro_data:
 	print(itemgetter(1)(city))
 cc_name=itemgetter(1,0)
