@@ -11,7 +11,7 @@ class C(A):
 	def pong(self):
 		print('PONG:',self)
 
-class D(B,C):
+class D(C,B):
 	def ping(self):
 		super().ping()
 		print('post-ping:',self)
@@ -23,7 +23,7 @@ class D(B,C):
 		C.pong(self)#需要显式传入self参数
 d=D()
 d.pong()
-C.pong(d)
+C.pong(d)#需要显式传入self参数
 print(D.__mro__)
 d.ping()
 d.pingpong()

@@ -5,6 +5,7 @@ from array import array
 import reprlib
 import numbers
 import operator
+import itertools
 class Vector:
 	typecode='d'
 
@@ -91,6 +92,45 @@ class Vector:
 		typecode=chr(octets[0])
 		memv=memoryview(octets[1:]).cast(typecode)
 		return cls(memv)
+
+	def __add__(self,other):#加法
+		try:
+			pairs=itertools.zip_longest(self,other,fillvalue=0.0)
+			return Vector(a+b for a,b in pairs)
+		except TypeError:
+			return NotImplemented
+
+	def __radd__(self,other):
+		return self+other
+
+	def __mul__(self,scalar):#乘法
+		if isinstance(scalar,numbers.Real):
+			return Vector([x*scalar for x in self])
+		else:
+			return NotImplemented
+
+	def __rmul__(self,scalar):
+		return self*scalar
+
+	def __eq__(self,other):
+		if isinstance(other,Vector):
+			return (len(self)==len(other) and 
+					all(a==b for a,b in zip(self,other)))
+		else:
+			return NotImplemented
+
+
+v1=Vector((1,2,3,4))
+v2=Vector((5,6))
+v1_copy=v1
+print(id(v1))
+print(id(v1_copy))
+v1+=Vector([3,4,5,6])
+print(v1)
+print(id(v1))
+print(id(v1_copy))
+'''
 v1=Vector([1,2,3])
 print(format(v1,'h'))
 print(v1.x)
+'''
